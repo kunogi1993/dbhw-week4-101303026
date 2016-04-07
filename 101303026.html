@@ -17,7 +17,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
     	<div class="container">
       	<div class="navbar-header">
-        	<a class="navbar-brand" href="#">高雄文化公車－路線景點</a>
+        	<a class="navbar-brand" href="#">高雄旅遊網－景點資料</a>
       	</div>
     	</div>
   	</nav>
@@ -28,7 +28,7 @@
     	<div class="container">
       	<br>
       	<br>
-      	<h1>高雄文化公車－路線景點</h1>
+      	<h1>高雄旅遊網－景點資料</h1>
     	</div>
   	</div>
 
@@ -59,19 +59,19 @@
         console.log(err);
       }
       else {
-        var routeList =JSON.parse(data);
-        var HTMLrouteList = routeList.map(function(route) {
-          var HTMLString = "<div class='col-md-4 drop-"+(Math.round(Math.random()*10000%3)+1)+"'><h2>"+route.BUSSCENE_ROUTE+"："+route.BUSSCENE_PLACE+"</h2><img class='img-thumbnail' src='"+route.BUSSCENE_IMAGE+"'><p><ul class='list-group'>";
-                     var items = "";
-                     for (var key in route) {
-                       if(key!="_id" && key!="Image") {
-                         items=items+"<li class='list-group-item'>"+key+":"+route[key]+"</li>";
-                       }
-                     }
-                     var HTMLString = HTMLString+items+"</ul></p><div>";
-                     return HTMLString;
+        var JSONstationList = JSON.parse(data);
+        var HTMLstationList = JSONstationList.map(function(station) {
+          var HTMLString = "<div class='col-md-4 drop-"+(Math.round(Math.random()*10000%3)+1)+"'><h2>"+station.Name+"</h2><img class='img-thumbnail' src='"+station.Picture1+"'><p><ul class='list-group'>";
+                      var items = "";
+                      for (var key in station) {
+                        if(key!="_id" && key!="Image") {
+                          items=items+"<li class='list-group-item'>"+key+":"+station[key]+"</li>";
+                        }
+                      }
+                      var HTMLString = HTMLString+items+"</ul></p><div>";
+                      return HTMLString;
                    });
-        HTMLrouteList.forEach(function(html) {
+        HTMLstationList.forEach(function(html) {
           $(html).appendTo("#content");
         });
         $('#loading').css('display','none');
